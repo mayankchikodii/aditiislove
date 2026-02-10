@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You, Aditi 💖</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fff6fa, #ffe6ef, #ffffff);
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 70px 20px;
+      overflow-x: hidden;
+    }
+
+    /* Envelope */
+    .envelope-wrapper {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .envelope {
+      width: 340px;
+      height: 220px;
+      background: linear-gradient(135deg, #ffd6e5, #ffeaf1);
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(255, 140, 180, 0.35);
+      transition: transform 1.2s ease, opacity 1.2s ease;
+    }
+
+    .envelope.fall {
+      transform: translateY(200px) rotate(8deg);
+      opacity: 0;
+    }
+
+    .flap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #ffb3cd;
+      clip-path: polygon(0 0, 100% 0, 50% 55%);
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index: 5;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .name {
+      position: absolute;
+      bottom: 18px;
+      width: 100%;
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 30px;
+      color: #c43d6d;
+    }
+
+    /* Image stack */
+    .image-stage {
+      position: relative;
+      width: 260px;
+      height: 360px;
+      margin-top: 30px;
+    }
+
+    .photo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(40px) scale(0.96);
+      transition: all 1s ease;
+      cursor: pointer;
+    }
+
+    .photo.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      z-index: 10;
+    }
+
+    /* Letter */
+    .letter {
+      max-width: 900px;
+      margin-top: 80px;
+      background: rgba(255,255,255,0.92);
+      padding: 60px 55px;
+      border-radius: 34px;
+      box-shadow: 0 25px 60px rgba(255, 150, 190, 0.35);
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 1.6s ease;
+    }
+
+    .letter.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 46px;
+      color: #ff4f8b;
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    .letter p {
+      font-size: 20px;
+      line-height: 1.9;
+      color: #4a2a35;
+      text-align: center;
+    }
+
+    .signature {
+      margin-top: 40px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: #ff6fa1;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Envelope -->
+<div class="envelope-wrapper" id="wrap">
+  <div class="envelope" id="env">
+    <div class="flap"></div>
+    <div class="name">Aditi 💖</div>
+  </div>
+</div>
+
+<!-- Image stack -->
+<div class="image-stage" id="stage">
+  <img src="photo1.jpeg" class="photo">
+  <img src="photo2.jpeg" class="photo">
+  <img src="photo3.jpeg" class="photo">
+</div>
+
+<!-- Letter -->
+<div class="letter" id="letter">
+  <h2>My Heart, Honestly</h2>
+  <p>
+      I want to start by saying I’m sorry.<br><br>
+
+      Sorry for every time I was wrong.<br>
+      Sorry for the moments I distanced myself, thinking silence would fix what only understanding could.<br><br>
+
+      I’ve realised how deeply you mean to me.<br>
+      How much I love you.<br>
+      How much I miss you even when you’re right there.<br><br>
+
+      I don’t want problems between us.<br>
+      I want solutions, together.<br>
+      I want to hold your hand and walk with you through every temple in India, praying together.<br><br>
+
+      When things get heavy for you, I don’t want to leave.<br> 
+      I want to sit right beside you, listen to every little thing, and face it together.<br><br>
+
+      I want a life with you <br>
+      The good days and the bad ones.<br>
+      The successes and the failures.<br>
+      Growing, learning, falling, and rising together.<br><br>
+
+      I don’t promise perfection.<br>
+      I promise effort.<br>
+      I promise honesty.<br>
+      I promise love.<br><br>
+
+      I want us.<br>
+      Always.
+    </p>
+  <div class="signature">
+    Always yours,<br>Mayank
+  </div>
+</div>
+
+<script>
+  const wrap = document.getElementById("wrap");
+  const env = document.getElementById("env");
+  const photos = document.querySelectorAll(".photo");
+  const letter = document.getElementById("letter");
+
+  let opened = false;
+  let current = 0;
+
+  wrap.onclick = () => {
+    if (opened) return;
+    opened = true;
+
+    env.classList.add("open");
+
+    setTimeout(() => {
+      env.classList.add("fall");
+      photos[0].classList.add("show");
+    }, 900);
+  };
+
+  photos.forEach(photo => {
+    photo.onclick = () => {
+      if (current < photos.length - 1) {
+        photos[current + 1].classList.add("show");
+        current++;
+      } else {
+        letter.classList.add("show");
+      }
+    };
+  });
+</script>
+
+</body>
+</html>
