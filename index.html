@@ -101,6 +101,23 @@ button {
   -webkit-touch-callout: none;
   user-select: none;
 }
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  background-clip: padding-box;
+}
+
+button:focus,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+#yesBtn:active,
+#noBtn:active {
+  filter: brightness(1);
+}
 
   </style>
 </head>
@@ -157,4 +174,5 @@ button {
 
 </body>
 </html>
+
 
